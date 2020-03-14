@@ -28,7 +28,6 @@ export default class Lightbox extends Component {
     didOpen: () => {},
     willClose: () => {},
     onClose: () => {},
-    onLongPress: () => {},
   };
 
   state = {
@@ -130,7 +129,6 @@ export default class Lightbox extends Component {
           <TouchableHighlight
             underlayColor={this.props.underlayColor}
             onPress={this.open}
-            onLongPress={this.props.onLongPress}
           >
             {this.props.children}
           </TouchableHighlight>

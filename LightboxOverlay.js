@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: WINDOW_WIDTH,
-    height: WINDOW_HEIGHT,
+    height: WINDOW_HEIGHT + 100,
   },
   open: {
     position: 'absolute',
@@ -72,19 +72,19 @@ export default class LightboxOverlay extends Component {
     backgroundColor: 'black',
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAnimating: false,
-      isPanning: false,
-      target: {
-        x: 0,
-        y: 0,
-        opacity: 1,
-      },
-      pan: new Animated.Value(0),
-      openVal: new Animated.Value(0),
-    };
+  state = {
+    isAnimating: false,
+    isPanning: false,
+    target: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+    },
+    pan: new Animated.Value(0),
+    openVal: new Animated.Value(0),
+  };
+
+  componentWillMount() {
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
       onStartShouldSetPanResponder: (evt, gestureState) => !this.state.isAnimating,
@@ -170,8 +170,8 @@ export default class LightboxOverlay extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
-    if(this.props.isOpen !== prevProps.isOpen && this.props.isOpen) {
+  componentWillReceiveProps(props) {
+    if(this.props.isOpen != props.isOpen && props.isOpen) {
       this.open();
     }
   }
